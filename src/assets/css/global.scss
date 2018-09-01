@@ -1,0 +1,74 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body{
+    font-family: "Helvetica Neue",Helvetica,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","微软雅黑",Arial,sans-serif;
+    color: #35383f;
+    font-weight: 500;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    background-color: #e1e4eb;
+}
+ul,li{
+    list-style: none;
+}
+.clear:after{
+    display: block;
+    content: '';
+    width: 0;
+    height: 0;
+    clear: both;
+}
+.el-tooltip__popper.is-dark{
+    background-color: #8e8f92 !important;
+}
+.el-tooltip__popper[x-placement^=bottom] .popper__arrow,.el-tooltip__popper[x-placement^=bottom] .popper__arrow::after{
+border-bottom-color: #8e8f92 !important;
+}
+.el-scrollbar__wrap{
+    overflow-x: hidden !important;
+}
+.el-scrollbar__bar.is-vertical{
+    top: 7px;
+    bottom: 7px;
+    right: 5px;
+    width: 4px;
+}
+.el-dropdown-menu__item:focus, .el-dropdown-menu__item:not(.is-disabled):hover{
+    color: #9cb5fd;
+    background-color: #fff;
+}
+.el-tag--info .el-tag__close:hover{
+    background-color: transparent;
+    color: #8e8f92;
+  }
+#app {
+    height: 100vh;
+    width: 100vw;
+    border-radius: 10px;
+    box-shadow: 0 0 5px #aaa;
+    background-color: #fff;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+.frame{
+    height: 100%;
+    .el-row{
+        height: 100%;
+        .el-col{
+            height: 100%;
+        }
+    }
+}
+
+//fixed screen(more than 1366)
+@media screen and (min-width: 1367px) {
+    #app{
+        width: 1366px;
+        height: 662px;
+    }
+}
