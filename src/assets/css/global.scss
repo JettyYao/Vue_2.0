@@ -25,7 +25,10 @@ ul,li{
     background-color: #8e8f92 !important;
 }
 .el-tooltip__popper[x-placement^=bottom] .popper__arrow,.el-tooltip__popper[x-placement^=bottom] .popper__arrow::after{
-border-bottom-color: #8e8f92 !important;
+    border-bottom-color: #8e8f92 !important;
+}
+.el-tooltip__popper[x-placement^=right] .popper__arrow,.el-tooltip__popper[x-placement^=right] .popper__arrow::after{
+    border-right-color: #8e8f92 !important;
 }
 .el-scrollbar__wrap{
     overflow-x: hidden !important;
@@ -35,6 +38,9 @@ border-bottom-color: #8e8f92 !important;
     bottom: 7px;
     right: 5px;
     width: 4px;
+}
+.el-dropdown-menu__item{
+    color: #8e8f92;
 }
 .el-dropdown-menu__item:focus, .el-dropdown-menu__item:not(.is-disabled):hover{
     color: #9cb5fd;

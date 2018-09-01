@@ -18,22 +18,21 @@
           <el-button><i class="fas fa-envelope"></i>Send Message</el-button>
           <div class="link">
             <ul>
-              <router-link tag="li" to="#">
+              <li @click="changeSelectStatus(0)" :class="{selectLink : 0 == LinkChange}">
                 <i class="el-icon-bell"></i> Every News
                 <span class="count">3</span>
-              </router-link>
-              <router-link tag="li" to="#">
+              </li>
+              <li @click="changeSelectStatus(1)" :class="{selectLink : 1 == LinkChange}">
                 <i class="el-icon-edit-outline"></i> Each Posts
-                <!-- <span class="count">3</span> -->
-              </router-link>
-              <router-link tag="li" to="#">
+              </li>
+              <li @click="changeSelectStatus(2)" :class="{selectLink : 2 == LinkChange}">
                 <i class="fas fa-user-secret"></i> Every Users
                 <span class="count newTip">new</span>
-              </router-link>
-              <router-link tag="li" to="#">
+              </li>
+              <li @click="changeSelectStatus(3)" :class="{selectLink : 3 == LinkChange}">
                 <i class="el-icon-service"></i> Each Comments
                 <span class="count">99+</span>
-              </router-link>
+              </li>
             </ul>
           </div>
           <div class="aphorism">
@@ -50,13 +49,13 @@
         </div>
       </el-col>
       <el-col :span="19" class="content">
-        <div class="NewPart BoxSize">
+        <div class="NewPart BoxSize PositionChange" :style="Top">
           <el-row>
             <el-col :span="8" class="ListArea">
               <div class="AreaHeader">
                 <ul class="clear">
                   <li>
-                    <el-tooltip class="item" effect="dark" content="菜单栏" placement="bottom">
+                    <el-tooltip class="item" effect="dark" content="暂无此功能" placement="bottom">
                       <i class="el-icon-menu"></i>
                     </el-tooltip>
                   </li>
@@ -79,76 +78,7 @@
                 <div class="ListShow">
                   <el-scrollbar style="height: 100%">
                     <ul>
-                      <li style="background-color:#fff">
-                        <el-row>
-                          <el-col :span="3">
-                            <div class="tip">
-                              N
-                            </div>
-                            <i class="el-icon-more" style="padding: 2px 0 0 4px;color:#d3d4d8;cursor:pointer;line-height: 20px;"></i>
-                          </el-col>
-                          <el-col :span="21">
-                            <div class="authorName">
-                              Sagacious Jetty
-                              <i class="fas fa-star"></i>
-                            </div>
-                            <div class="eachTitle">
-                              Monday sharing meeting
-                            </div>
-                            <div class="eachContent">
-                              <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit...</p>
-                              <span class="eachDay">100 days ago</span>
-                            </div>
-                          </el-col>
-                        </el-row>
-                      </li>
-                      <li>
-                        <el-row>
-                          <el-col :span="3">
-                            <div class="tip">
-                              N
-                            </div>
-                            <i class="el-icon-more" style="padding: 2px 0 0 4px;color:#d3d4d8;cursor:pointer;line-height: 20px;"></i>
-                          </el-col>
-                          <el-col :span="21">
-                            <div class="authorName">
-                              Sagacious Jetty
-                              <i class="fas fa-star"></i>
-                            </div>
-                            <div class="eachTitle">
-                              Monday sharing meeting
-                            </div>
-                            <div class="eachContent">
-                              <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit...</p>
-                              <span class="eachDay">100 days ago</span>
-                            </div>
-                          </el-col>
-                        </el-row>
-                      </li>
-                      <li>
-                        <el-row>
-                          <el-col :span="3">
-                            <div class="tip">
-                              N
-                            </div>
-                            <i class="el-icon-more" style="padding: 2px 0 0 4px;color:#d3d4d8;cursor:pointer;line-height: 20px;"></i>
-                          </el-col>
-                          <el-col :span="21">
-                            <div class="authorName">
-                              Sagacious Jetty
-                              <i class="fas fa-star"></i>
-                            </div>
-                            <div class="eachTitle">
-                              Monday sharing meeting
-                            </div>
-                            <div class="eachContent">
-                              <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit...</p>
-                              <span class="eachDay">100 days ago</span>
-                            </div>
-                          </el-col>
-                        </el-row>
-                      </li>
-                      <li>
+                      <li v-for="(item,index) in ContentList" :key="index" :class="{selectList:index==listChoice}" @click="SelectList(index)">
                         <el-row>
                           <el-col :span="3">
                             <div class="tip">
@@ -185,7 +115,7 @@
                   <span class="el-dropdown-link">
                     <i class="el-icon-more"></i>
                   </span>
-                  <el-dropdown-menu slot="dropdown">
+                  <el-dropdown-menu slot="dropdown" class="dropdownPosition2">
                     <el-dropdown-item><i class="el-icon-setting"> 配置</i></el-dropdown-item>
                     <el-dropdown-item><i class="el-icon-close"> 退出</i></el-dropdown-item>
                   </el-dropdown-menu>
@@ -230,6 +160,260 @@
             </el-col>
           </el-row>
         </div>
+        <div class="NewPart BoxSize">
+          <el-row>
+            <el-col :span="8" class="ListArea">
+              <div class="AreaHeader">
+                <ul class="clear">
+                  <li>
+                      <el-dropdown trigger="click"> <!-- @command="handleCommand" -->
+                      <span class="el-dropdown-link">
+                        <el-tooltip class="item" effect="dark" content="菜单栏" placement="right">
+                          <i class="el-icon-menu"></i>
+                        </el-tooltip>
+                      </span>
+                      <el-dropdown-menu slot="dropdown" class="dropdownPosition1">
+                        <el-dropdown-item command="a">黄金糕</el-dropdown-item>
+                        <el-dropdown-item command="b">狮子头</el-dropdown-item>
+                        <el-dropdown-item command="c">螺蛳粉</el-dropdown-item>
+                        <el-dropdown-item command="d" disabled>双皮奶</el-dropdown-item>
+                        <el-dropdown-item command="e" divided>蚵仔煎</el-dropdown-item>
+                      </el-dropdown-menu>
+                    </el-dropdown>
+                  </li>
+                  <li>
+                    <el-tooltip class="item" effect="dark" content="搜索" placement="bottom">
+                      <i class="el-icon-search"></i>
+                    </el-tooltip>
+                  </li>
+                  <li>
+                    <el-tooltip class="item" effect="dark" content="删除" placement="bottom">
+                      <i class="el-icon-delete"></i>
+                    </el-tooltip>
+                  </li>
+                </ul>
+              </div>
+              <div class="ListMenu">
+                <div class="tooltip">
+                  <i class="fab fa-sellsy"></i> Newest
+                </div>
+                <div class="ListShow">
+                  <el-scrollbar style="height: 100%">
+                    <ul>
+                      <li v-for="(item,index) in ContentList" :key="index" :class="{selectList:index==listChoice}" @click="SelectList(index)">
+                        <el-row>
+                          <el-col :span="3">
+                            <div class="tip">
+                              N
+                            </div>
+                            <i class="el-icon-more" style="padding: 2px 0 0 4px;color:#d3d4d8;cursor:pointer;line-height: 20px;"></i>
+                          </el-col>
+                          <el-col :span="21">
+                            <div class="authorName">
+                              Sagacious Jetty
+                              <i class="fas fa-star"></i>
+                            </div>
+                            <div class="eachTitle">
+                              Monday sharing meeting
+                            </div>
+                            <div class="eachContent">
+                              <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit...</p>
+                              <span class="eachDay">100 days ago</span>
+                            </div>
+                          </el-col>
+                        </el-row>
+                      </li>
+                    </ul>
+                  </el-scrollbar>
+                </div>
+              </div>
+              <div class="addContent">
+                <el-button icon="el-icon-plus" circle size="medium"></el-button>
+              </div>
+            </el-col>
+            <el-col :span="16" class="ContentArea">
+              <div class="contentHeader">
+                <el-dropdown trigger="click">
+                  <span class="el-dropdown-link">
+                    <i class="el-icon-more"></i>
+                  </span>
+                  <el-dropdown-menu slot="dropdown" class="dropdownPosition2">
+                    <el-dropdown-item><i class="el-icon-setting"> 配置</i></el-dropdown-item>
+                    <el-dropdown-item><i class="el-icon-close"> 退出</i></el-dropdown-item>
+                  </el-dropdown-menu>
+                </el-dropdown>
+              </div>
+              <div class="function">
+                <i class="el-icon-edit"></i>
+                <i class="el-icon-printer"></i>
+              </div>
+              <div class="contentShow">
+                <el-scrollbar style="height:100%">
+                  <div class="top">
+                    <el-row :gutter=30>
+                      <el-col :span="2" class="left-icon">
+                        <i class="fas fa-quote-left"></i>
+                      </el-col>
+                      <el-col :span="22" class="right-content">
+                        <p class="time">22TH JULY 2018</p>
+                        <h2>Tuesday sharing meeting</h2>
+                        <el-tag size="small" type="info" closable>News (For Monday)</el-tag>
+                      </el-col>
+                    </el-row>
+                  </div>
+                  <div class="bottom">
+                    <el-row :gutter=30>
+                      <el-col :span="2" class="left-icon"></el-col>
+                      <el-col :span="22" class="right-content">
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero, quo perferendis. Distinctio, rem sint nostrum corrupti architecto similique illo aperiam doloremque ex recusandae voluptatibus quo error unde hic minus ipsa.</p>
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero, quo perferendis. Distinctio, rem sint nostrum corrupti architecto similique illo aperiam doloremque ex recusandae voluptatibus quo error unde hic minus ipsa.</p>
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero, quo perferendis. Distinctio, rem sint nostrum corrupti architecto similique illo aperiam doloremque ex recusandae voluptatibus quo error unde hic minus ipsa.</p>
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero, quo perferendis. Distinctio, rem sint nostrum corrupti architecto similique illo aperiam doloremque ex recusandae voluptatibus quo error unde hic minus ipsa.</p>
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero, quo perferendis. Distinctio, rem sint nostrum corrupti architecto similique illo aperiam doloremque ex recusandae voluptatibus quo error unde hic minus ipsa.</p>
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero, quo perferendis. Distinctio, rem sint nostrum corrupti architecto similique illo aperiam doloremque ex recusandae voluptatibus quo error unde hic minus ipsa.</p>
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero, quo perferendis. Distinctio, rem sint nostrum corrupti architecto similique illo aperiam doloremque ex recusandae voluptatibus quo error unde hic minus ipsa.</p>
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero, quo perferendis. Distinctio, rem sint nostrum corrupti architecto similique illo aperiam doloremque ex recusandae voluptatibus quo error unde hic minus ipsa.</p>
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero, quo perferendis. Distinctio, rem sint nostrum corrupti architecto similique illo aperiam doloremque ex recusandae voluptatibus quo error unde hic minus ipsa.</p>
+                      </el-col>
+                    </el-row>
+                  </div>
+                </el-scrollbar>
+              </div>
+            </el-col>
+          </el-row>
+        </div>
+        <div class="NewPart BoxSize">
+          <el-row>
+            <el-col :span="8" class="ListArea">
+              <div class="AreaHeader">
+                <ul class="clear">
+                  <li>
+                      <el-dropdown trigger="click"> <!-- @command="handleCommand" -->
+                      <span class="el-dropdown-link">
+                        <el-tooltip class="item" effect="dark" content="菜单栏" placement="right">
+                          <i class="el-icon-menu"></i>
+                        </el-tooltip>
+                      </span>
+                      <el-dropdown-menu slot="dropdown" class="dropdownPosition1">
+                        <el-dropdown-item command="a">黄金糕</el-dropdown-item>
+                        <el-dropdown-item command="b">狮子头</el-dropdown-item>
+                        <el-dropdown-item command="c">螺蛳粉</el-dropdown-item>
+                        <el-dropdown-item command="d" disabled>双皮奶</el-dropdown-item>
+                        <el-dropdown-item command="e" divided>蚵仔煎</el-dropdown-item>
+                      </el-dropdown-menu>
+                    </el-dropdown>
+                  </li>
+                  <li>
+                    <el-tooltip class="item" effect="dark" content="搜索" placement="bottom">
+                      <i class="el-icon-search"></i>
+                    </el-tooltip>
+                  </li>
+                  <li>
+                    <el-tooltip class="item" effect="dark" content="删除" placement="bottom">
+                      <i class="el-icon-delete"></i>
+                    </el-tooltip>
+                  </li>
+                </ul>
+              </div>
+              <div class="ListMenu">
+                <div class="tooltip">
+                  <i class="fab fa-sellsy"></i> Newest
+                </div>
+                <div class="ListShow">
+                  <el-scrollbar style="height: 100%">
+                    <ul>
+                      <li v-for="(item,index) in ContentList" :key="index" :class="{selectList:index==listChoice}" @click="SelectList(index)">
+                        <el-row>
+                          <el-col :span="3">
+                            <div class="tip">
+                              N
+                            </div>
+                            <i class="el-icon-more" style="padding: 2px 0 0 4px;color:#d3d4d8;cursor:pointer;line-height: 20px;"></i>
+                          </el-col>
+                          <el-col :span="21">
+                            <div class="authorName">
+                              Sagacious Jetty
+                              <i class="fas fa-star"></i>
+                            </div>
+                            <div class="eachTitle">
+                              yao1508728331@gmail.com
+                            </div>
+                            <div class="eachContent">
+                              <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit...</p>
+                              <span class="eachDay">100 days ago</span>
+                            </div>
+                          </el-col>
+                        </el-row>
+                      </li>
+                    </ul>
+                  </el-scrollbar>
+                </div>
+              </div>
+              <div class="addContent">
+                <el-button icon="el-icon-plus" circle size="medium"></el-button>
+              </div>
+            </el-col>
+            <el-col :span="16" class="ContentArea">
+              <div class="contentHeader">
+                <el-dropdown trigger="click">
+                  <span class="el-dropdown-link">
+                    <i class="el-icon-more"></i>
+                  </span>
+                  <el-dropdown-menu slot="dropdown" class="dropdownPosition2">
+                    <el-dropdown-item><i class="el-icon-setting"> 配置</i></el-dropdown-item>
+                    <el-dropdown-item><i class="el-icon-close"> 退出</i></el-dropdown-item>
+                  </el-dropdown-menu>
+                </el-dropdown>
+              </div>
+              <div class="function">
+                <i class="el-icon-edit"></i>
+                <i class="el-icon-printer"></i>
+              </div>
+              <div class="contentShow">
+                <el-scrollbar style="height:100%">
+                  <div class="top">
+                    <el-row :gutter=30>
+                      <el-col :span="2" class="left-icon">
+                        <i class="fas fa-quote-left"></i>
+                      </el-col>
+                      <el-col :span="22" class="right-content">
+                        <p class="time">CREATED AT: 22TH JULY 2018</p>
+                        <h2 class="userIntro">Sagacious Jetty</h2>
+                      </el-col>
+                    </el-row>
+                  </div>
+                  <div class="bottom">
+                    <el-row :gutter=30>
+                      <el-col :span="2" class="left-icon"></el-col>
+                      <el-col :span="22" class="right-content user-content">
+                        <div>
+                          <el-row>
+                            <el-col :span="5">Email Address：</el-col>
+                            <el-col :span="19">yao1508728331@gmail.com</el-col>
+                          </el-row>
+                        </div>
+                        <div>
+                          <el-row>
+                            <el-col :span="5">User Introduce：</el-col>
+                            <el-col :span="19">
+                              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea dolor a distinctio vero omnis saepe totam. Quod, accusantium! Cumque unde recusandae eius consequatur, mollitia id illum quos nisi quae deleniti!</p>
+                            </el-col>
+                          </el-row>
+                        </div>
+                        <div>
+                          <el-row>
+                            <el-col :span="5">User Comment：</el-col>
+                            <el-col :span="19">yao1508728331@gmail.com</el-col>
+                          </el-row>
+                        </div>
+                      </el-col>
+                    </el-row>
+                  </div>
+                </el-scrollbar>
+              </div>
+            </el-col>
+          </el-row>
+        </div>
       </el-col>
     </el-row>
   </div>
@@ -240,6 +424,24 @@ export default {
   name: 'Index',
   props: {
     msg: String
+  },
+  data() {
+    return {
+      LinkChange: 0,
+      listChoice: 0,
+      ContentList: ['1','2'],
+      Top: 'margin-top: 0'
+    }
+  },
+  methods: {
+    changeSelectStatus: function (index) {
+      this.LinkChange = index
+      this.listChoice = 0
+      this.Top = 'margin-top: ' + (-index * 662) + 'px'
+    },
+    SelectList: function (index) {
+      this.listChoice = index
+    }
   }
 }
 </script>
@@ -328,6 +530,9 @@ export default {
           &:hover .newTip{
             border-color: transparent;
           }
+        }
+        li.selectLink{
+          color: #668efd;
         }
       }
     }
@@ -462,6 +667,9 @@ export default {
                 }
               }
             }
+            li.selectList{
+              background-color: #fff;
+            }
           }
         }
       }
@@ -527,6 +735,7 @@ export default {
             }
           }
           .right-content{
+            letter-spacing: 1px;
             p.time{
               font-size: 12px;
               color: #d3d4d8;
@@ -536,6 +745,13 @@ export default {
               padding: 6px 0;
               font-size: 32px;
               color: #868688;
+            }
+            h2.userIntro{
+              padding: 60px 0 5px 5px;
+              margin-top: 10px;
+              color: #fff;
+              background-color: #9cb5fd;
+              text-transform: uppercase;
             }
             .el-tag{
               background-color: #fff;
@@ -558,9 +774,22 @@ export default {
               color: #868688;
             }
           }
+          .user-content{
+            font-size: 14px;
+            color: #868688;
+            >div{
+              padding: 7px 0;
+              .el-col-5{
+                padding-left: 8px;
+              }
+            }
+          }
         }
       }
     }
+  }
+  .PositionChange{
+    transition: margin-top .6s;
   }
 }
 </style>
@@ -572,12 +801,13 @@ export default {
     background-color: #668efd !important;
   }
 }
-.el-dropdown-menu{
+.dropdownPosition2{
   top: 30px !important;
   left: 1246px !important;
-  .el-dropdown-menu__item{
-    color: #868688;
-  }
+}
+.dropdownPosition1{
+    top: 34px !important;
+    left: 509px !important;
 }
 .el-tag .el-icon-close{
   top: 0 !important;
